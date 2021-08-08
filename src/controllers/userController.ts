@@ -10,7 +10,7 @@ export async function signUp(req: Request, res: Response){
     const signUpError = signUpData.validate(req.body).error;
     if(signUpError) return res.sendStatus(400);
 
-    const {email, password, confirmPassword}: UserRegisterData = req.body;
+    const {password, confirmPassword}: UserRegisterData = req.body;
     if(password !== confirmPassword) return res.sendStatus(400);
 
     const createdUser = await userService.registerUser(req.body);

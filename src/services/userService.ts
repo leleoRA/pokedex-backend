@@ -21,9 +21,9 @@ export async function login({email, password}: UserInterface) {
   if(!user) return false;
 
   if(bcrypt.compareSync(password, user.password)){
-    const token = uuid;
-    await getRepository(Session).insert({user, token});
-    return token;
+    const token = uuid();
+    await getRepository(Session).save({user, token});
+    return { token };
   
   } else {
     return false;
