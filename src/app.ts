@@ -13,9 +13,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.post("/sign-in", userController.signIn);
 
 app.post("/sign-up", userController.signUp);
+
+app.post("/sign-in", userController.signIn);
+
 
 app.get("/pokemons", authMiddleware)
 

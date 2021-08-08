@@ -31,9 +31,9 @@ export async function signIn(req: Request, res: Response){
     if(signInError) return res.sendStatus(400);
 
     const {email, password}: UserInterface = req.body;
-    const validToken = await userService.login({ email, password });
-    if(!validToken) return res.status(401);
-    res.send({ validToken }).status(200);
+    const token = await userService.login({ email, password });
+    if(!token) return res.status(401);
+    res.send({ token }).status(200);
 
   }catch (err){
     console.log(err);
