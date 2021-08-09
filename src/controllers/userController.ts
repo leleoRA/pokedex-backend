@@ -32,7 +32,7 @@ export async function signIn(req: Request, res: Response){
 
     const {email, password}: UserInterface = req.body;
     const token = await userService.login({ email, password });
-    if(!token) return res.status(401);
+    if(!token) return res.sendStatus(401);
     res.send({ token }).status(200);
 
   }catch (err){

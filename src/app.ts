@@ -18,8 +18,7 @@ app.post("/sign-up", userController.signUp);
 
 app.post("/sign-in", userController.signIn);
 
-
-app.get("/pokemons", authMiddleware)
+// app.get("/pokemons", authMiddleware)
 
 export async function init () {
   await connectDatabase();
