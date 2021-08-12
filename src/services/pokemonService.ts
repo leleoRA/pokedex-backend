@@ -16,7 +16,7 @@ export async function verifyDatabaseContent() {
   }
 }
 
-export async function populatePokemonDatabase(res: Response) {
+export async function populatePokemonDatabase() {
   for (let i = 1; i < 200; i++) {
     const result = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
     const newPokemon = {
@@ -40,5 +40,5 @@ export async function populatePokemonDatabase(res: Response) {
     const pokemon = getRepository(Pokemon).create(newPokemon);
     const resultquery = await getRepository(Pokemon).save(pokemon);
   }
-  res.send("OK");
+  return;
 }
