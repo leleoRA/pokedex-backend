@@ -1,20 +1,9 @@
 import { Request, Response } from "express";
-import {signInData, signUpData} from "../schemas/userSchemas";
-import { UserInterface, UserRegisterData } from "../interfaces/UserInterfaces";
-import * as pokemonService from "../services/pokemonService"
-
-export async function verifyDatabaseStatus(res: Response) {
-    const isDatabaseEmpty = pokemonService.verifyDatabaseContent();
-
-    if(isDatabaseEmpty){
-        pokemonService.populatePokemonDatabase();
-    }
-}
-
+import * as pokemonService from "../services/pokemonService";
 
 export async function getPokemons(req: Request, res: Response){
 
-    const pokemons = await pokemonService.getPokemons(req.body);
+    const pokemons = await pokemonService.getPokemons();
     if(!pokemons) return res.sendStatus(404);
     res.send(pokemons).status(200);
 
