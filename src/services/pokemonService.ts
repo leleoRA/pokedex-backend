@@ -5,7 +5,7 @@ import axios from "axios";
 
 
 
-export async function getPokemons() {
+export async function getPokemons(userId: number) {
   const allPokemons = getRepository(Pokemon).find();
   return allPokemons;
 
