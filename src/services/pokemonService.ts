@@ -1,7 +1,5 @@
 import { getRepository } from "typeorm";
 import Pokemon from "../entities/Pokemon";
-import { Request, Response } from "express";
-import Catchpokemons from "../entities/CaughtPokemon";
 import axios from "axios";
 
 export async function verifyDatabaseContent() {
@@ -16,7 +14,14 @@ export async function verifyDatabaseContent() {
   }
 }
 
+export async function getPokemons() {
+  const allPokemons = getRepository(Pokemon).find();
+  return allPokemons;
+
+}
+
 export async function populatePokemonDatabase() {
+
   for (let i = 1; i < 200; i++) {
     const result = await axios.get(`https://pokeapi.co/api/v2/pokemon/${i}`);
     const newPokemon = {
@@ -38,7 +43,7 @@ export async function populatePokemonDatabase() {
         .split("\n")
         .join(" ");
     const pokemon = getRepository(Pokemon).create(newPokemon);
-    const resultquery = await getRepository(Pokemon).save(pokemon);
+    await getRepository(Pokemon).save(pokemon);
   }
   return;
 }

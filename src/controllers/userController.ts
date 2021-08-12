@@ -5,8 +5,6 @@ import * as userService from "../services/userService";
 
 
 export async function signUp(req: Request, res: Response){
-
-  try{
     const signUpError = signUpData.validate(req.body).error;
     if(signUpError) return res.sendStatus(400);
 
@@ -16,17 +14,11 @@ export async function signUp(req: Request, res: Response){
     const createdUser = await userService.registerUser(req.body);
     if(!createdUser) return res.sendStatus(409);
     res.sendStatus(201);
-
-  }catch (err){
-    console.log(err);
-    res.sendStatus(500);
-  }
 }
 
 
 export async function signIn(req: Request, res: Response){
 
-  try{
     const signInError = signInData.validate(req.body).error;
     if(signInError) return res.sendStatus(400);
 
@@ -35,10 +27,6 @@ export async function signIn(req: Request, res: Response){
     if(!token) return res.sendStatus(401);
     res.send({ token }).status(200);
 
-  }catch (err){
-    console.log(err);
-    res.sendStatus(500);
-  }
 }
 
 

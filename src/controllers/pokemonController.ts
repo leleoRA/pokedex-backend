@@ -12,9 +12,13 @@ export async function verifyDatabaseStatus(res: Response) {
 }
 
 
-// export async function getPokemons(req: Request, res: Response){
+export async function getPokemons(req: Request, res: Response){
 
-// }
+    const pokemons = await pokemonService.getPokemons(req.body);
+    if(!pokemons) return res.sendStatus(404);
+    res.send(pokemons).status(200);
+
+}
 
 // export async function catchPokemon(req: Request, res: Response){
 
