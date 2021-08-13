@@ -1,4 +1,3 @@
-import { number } from "joi";
 import { getRepository } from "typeorm";
 import Pokemon from "../entities/Pokemon";
 import CaughtPokemon from "../entities/CaughtPokemon";
@@ -8,9 +7,9 @@ export async function getPokemons() {
   return allPokemons;
 }
 
-export async function addPokemonToMyPokedex(pokemonId: string, userId: string) {
+export async function addPokemonToMyPokedex(pokemonId: number, userId: number) {
 
-  const pokemon = await getRepository(Pokemon).findOne({ id: pokemonId });
+  const pokemon = await getRepository(Pokemon).findOne({ where: {id: pokemonId} });
 
   if(pokemon.inMyPokemons === false){
     await getRepository(CaughtPokemon).save({userId, pokemonId});
